@@ -18,11 +18,15 @@ function card(recipe){
     </a>
   </article>`;
 }
-async function renderList(filter=''){
+async function renderList(filter='', tagFilter=''){
   const data = await getData();
   const cards = document.getElementById('cards'); if(!cards) return;
   const q = filter.trim().toLowerCase();
-  const filtered = data.recipes.filter(r => !q || r.title.toLowerCase().includes(q) || r.tags.join(' ').toLowerCase().includes(q) || r.description.toLowerCase().includes(q));
+  const filtered = data.recipes.filter(r => {
+  const matchesText = !q || r.title.toLowerCase().includes(q) || r.tags.join(' ').toLowerCase().includes(q) || r.description.toLowerCase().includes(q);
+  const matchesTag = !tagFilter || (r.tags || []).some(t => t.toLowerCase() === tagFilter.toLowerCase());
+  return matchesText && matchesTag;
+});
   cards.innerHTML = filtered.map(card).join('') || '<p>Geen resultaten. Probeer een andere zoekterm.</p>';
 }
 async function loadRecipe(slug){
@@ -40,5 +44,29 @@ async function loadRecipe(slug){
   document.getElementById('r-steps').innerHTML = r.steps.map(s=>`<li>${s}</li>`).join('');
 }
 document.addEventListener('DOMContentLoaded',()=>{
-  const search = document.getElementById('search'); if(search){ renderList(); let t; search.addEventListener('input',()=>{clearTimeout(t); t=setTimeout(()=>renderList(search.value),120);});}
+  const search = document.getElementById('search');
+  if(search){ renderListWithState(); let t; search.addEventListener('input',()=>{clearTimeout(t); t=setTimeout(()=>renderListWithState(),120);}); }
+});
+
+
+let __selectedTag = '';
+
+async function renderListWithState(){
+  const search = document.getElementById('search');
+  const q = search ? search.value : '';
+  await renderList(q, __selectedTag);
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  const filters = document.getElementById('filters');
+  if(filters){
+    filters.addEventListener('click', (e)=>{
+      const btn = e.target.closest('button[data-tag]');
+      if(!btn) return;
+      __selectedTag = btn.getAttribute('data-tag') || '';
+      // active class
+      [...filters.querySelectorAll('.chip')].forEach(b=>b.classList.toggle('active', b===btn));
+      renderListWithState();
+    });
+  }
 });

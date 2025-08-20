@@ -49,3 +49,9 @@ h2{font-size:24px;margin:18px 0 8px}
 .tag.ontbijt{background:#ff9800;color:#fff}
 .tag.lunch{background:#2196f3;color:#fff}
 .tag.diner{background:#4caf50;color:#fff}
+
+
+/* Filter chips */
+.filters{display:flex;gap:8px;align-items:center;padding:10px 14px;border-bottom:1px solid #eee;background:#fff;position:sticky;top:60px;z-index:9}
+.chip{border:1px solid #ddd;background:#fff;border-radius:999px;padding:8px 12px;font:inherit;cursor:pointer}
+.chip.active{border-color:var(--brand);box-shadow:0 0 0 3px rgba(30,99,255,.15)}
