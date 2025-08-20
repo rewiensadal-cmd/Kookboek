@@ -61,3 +61,15 @@ h2{font-size:24px;margin:18px 0 8px}
 .topbar.centered{display:flex;align-items:center;justify-content:center;grid-template-columns:unset;padding:12px 14px}
 .topbar.centered .brand{font-weight:800;letter-spacing:.2px;text-decoration:none;color:var(--fg);text-align:center;margin:0 auto}
 .topbar .menu,.topbar .icons{display:none !important}
+
+
+/* Kleuren per chip categorie */
+.chip.ontbijt { background:#ff9800; color:#fff; }
+.chip.lunch { background:#2196f3; color:#fff; }
+.chip.diner { background:#4caf50; color:#fff; }
+
+
+/* Active state voor gekleurde chips */
+.chip.ontbijt.active { box-shadow:0 0 0 3px rgba(255,152,0,.4); }
+.chip.lunch.active { box-shadow:0 0 0 3px rgba(33,150,243,.4); }
+.chip.diner.active { box-shadow:0 0 0 3px rgba(76,175,80,.4); }
