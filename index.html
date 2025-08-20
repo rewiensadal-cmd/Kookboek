@@ -7,8 +7,14 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="topbar centered">
-    <span class="brand">Kookboek Rewien & Anchelita</span>
+  <header class="topbar">
+    <button class="menu" aria-label="Menu" title="Menu">☰</button>
+    <a class="brand" href="./">Kookboek Rewien & Anchelita</a>
+    <nav class="icons">
+      <a href="#" aria-label="Scan">▦</a>
+      <a href="#" aria-label="Profiel">👤</a>
+      <a href="#" aria-label="Mandje">🛒</a>
+    </nav>
   </header>
 
   <div class="search-wrap">
@@ -18,9 +24,9 @@
 
   <div id="filters" class="filters" aria-label="Filter op type">
     <button data-tag="" class="chip active">Alles</button>
-    <button data-tag="Ontbijt" class="chip ontbijt">Ontbijt</button>
-    <button data-tag="Lunch" class="chip lunch">Lunch</button>
-    <button data-tag="Diner" class="chip diner">Diner</button>
+    <button data-tag="Ontbijt" class="chip">Ontbijt</button>
+    <button data-tag="Lunch" class="chip">Lunch</button>
+    <button data-tag="Diner" class="chip">Diner</button>
   </div>
 
   <main id="content">

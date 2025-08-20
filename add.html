@@ -102,7 +102,48 @@
     el('clear-gh').addEventListener('click', clearSettings);
 
     // live preview
-    const form = document.getElementById('recipe-form');
+    
+// --- Prefill when editing (add.html?slug=...) ---
+const params = new URLSearchParams(location.search);
+const editSlug = params.get('slug');
+if (editSlug) {
+  // Update titles
+  try {
+    document.title = 'Recept bewerken';
+    const brandEl = document.querySelector('.topbar .brand');
+    if (brandEl) brandEl.textContent = 'Recept bewerken';
+  } catch(e){}
+  // Disable slug change while editing (avoids mismatch)
+  const slugInput = document.querySelector('[name="slug"]');
+  if (slugInput) { slugInput.value = editSlug; slugInput.readOnly = true; }
+
+  // Fetch local recipes.json and prefill
+  fetch('recipes.json')
+    .then(r => r.json())
+    .then(data => {
+      const rec = (data.recipes || []).find(r => r.slug === editSlug);
+      if (!rec) return;
+      (document.querySelector('[name="title"]')||{}).value = rec.title || '';
+      (document.querySelector('[name="description"]')||{}).value = rec.description || '';
+      (document.querySelector('[name="time"]')||{}).value = rec.time || '';
+      (document.querySelector('[name="servings"]')||{}).value = rec.servings || '';
+      (document.querySelector('[name="tags"]')||{}).value = (rec.tags || []).join(', ');
+      (document.querySelector('[name="ingredients"]')||{}).value = (rec.ingredients || []).join('\n');
+      (document.querySelector('[name="steps"]')||{}).value = (rec.steps || []).join('\n');
+      // Preview bestaande afbeelding (optioneel, alleen als img bestaat)
+      const preview = document.getElementById('image-preview');
+      if (preview) {
+        const img = new Image();
+        img.alt = 'Bestaande afbeelding';
+        img.style.maxWidth = '100%';
+        img.onload = () => { preview.innerHTML=''; preview.appendChild(img); };
+        img.onerror = () => {};
+        img.src = `images/${editSlug}.png`;
+      }
+    })
+    .catch(()=>{});
+}
+const form = document.getElementById('recipe-form');
     const preview = document.getElementById('json-preview');
     form.addEventListener('input', () => {
       const fd = new FormData(form);
@@ -159,8 +200,9 @@
         el('result').textContent='Ophalen van recipes.json…';
         const file = await getFile(owner, repo, 'recipes.json', branch, token);
         const current = JSON.parse(atob(file.content.replace(/\n/g,'')));
-        if(current.recipes.find(r => r.slug === slug)) throw new Error('Er bestaat al een recept met deze slug.');
-        current.recipes.push(recipe);
+        const idx = current.recipes.findIndex(r => r.slug === slug);
+        if(idx >= 0){ current.recipes[idx] = recipe; }
+        else { current.recipes.push(recipe); }
         const newJson = JSON.stringify(current, null, 2);
         const newB64 = btoa(unescape(encodeURIComponent(newJson)));
 
@@ -173,8 +215,11 @@
         }
 
         el('result').textContent='Wijziging committen…';
-        await putFile(owner, repo, 'recipes.json', `feat: add recipe ${slug}`, newB64, branch, file.sha, token);
-        el('result').textContent=`Gelukt! Recept '${recipe.title}' toegevoegd. Keer terug naar de homepage om het te zien.`;
+        const commitMsg = (idx >= 0) ? `feat: update recipe ${slug}` : `feat: add recipe ${slug}`;
+        await putFile(owner, repo, 'recipes.json', commitMsg, newB64, branch, file.sha, token);
+        el('result').textContent = (idx >= 0)
+          ? `Gelukt! Recept '${recipe.title}' aangepast. Keer terug naar de homepage om het te zien.`
+          : `Gelukt! Recept '${recipe.title}' toegevoegd. Keer terug naar de homepage om het te zien.`;
       }catch(err){
         el('result').textContent='Fout: ' + err.message;
       }
