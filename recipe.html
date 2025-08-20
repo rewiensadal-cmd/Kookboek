@@ -41,6 +41,10 @@
     </article>
   </main>
 
+  
+  <a id="edit-btn" class="fab" title="Recept bewerken" aria-label="Recept bewerken">✎</a>
+
+
   <footer class="site-footer"><a href="./">⬅ Terug naar alle recepten</a></footer>
 
   <script src="app.js"></script>
@@ -48,6 +52,12 @@
     const params = new URLSearchParams(location.search);
     const slug = params.get('slug');
     loadRecipe(slug);
+    
+  const editBtn = document.getElementById('edit-btn');
+  if(editBtn && slug){
+    editBtn.href = 'add.html?slug=' + encodeURIComponent(slug);
+  }
+
   </script>
 </body>
 </html>
