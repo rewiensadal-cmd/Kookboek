@@ -218,8 +218,9 @@ const form = document.getElementById('recipe-form');
         const commitMsg = (idx >= 0) ? `feat: update recipe ${slug}` : `feat: add recipe ${slug}`;
         await putFile(owner, repo, 'recipes.json', commitMsg, newB64, branch, file.sha, token);
         el('result').textContent = (idx >= 0)
-          ? `Gelukt! Recept '${recipe.title}' aangepast. Keer terug naar de homepage om het te zien.`
-          : `Gelukt! Recept '${recipe.title}' toegevoegd. Keer terug naar de homepage om het te zien.`;
+          ? `Gelukt! Recept '${recipe.title}' aangepast. Je wordt zo teruggestuurd.`
+          : `Gelukt! Recept '${recipe.title}' toegevoegd. Je wordt zo teruggestuurd.`;
+        setTimeout(() => { window.location.href = './index.html'; }, 2000);
       }catch(err){
         el('result').textContent='Fout: ' + err.message;
       }

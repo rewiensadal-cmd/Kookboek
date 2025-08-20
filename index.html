@@ -40,5 +40,22 @@
 
   <a href="add.html" class="fab" aria-label="Nieuw recept">＋</a>
   <script src="app.js"></script>
+
+  <div id="toast" class="toast"></div>
+  <script>
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.className = "toast show";
+      setTimeout(() => { t.className = "toast"; }, 4000);
+    }
+
+    const saved = localStorage.getItem('recipeSaved');
+    if (saved) {
+      showToast(`Recept "${saved}" succesvol opgeslagen!`);
+      localStorage.removeItem('recipeSaved');
+    }
+  </script>
+
 </body>
 </html>
