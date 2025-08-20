@@ -1,138 +1,32 @@
-[
-  {
-    "title": "Vega Surinaamse Bami",
-    "category": "Diner",
-    "image": "",
-    "ingredients": [
-      "250–300 g mie/noedels",
-      "300 g spitskool, fijngesneden",
-      "200 g wortel, in reepjes",
-      "1 paprika, in reepjes",
-      "2–3 teentjes knoflook, fijn",
-      "2 el ketjap manis",
-      "1 el lichte sojasaus",
-      "1 el (vegan) oestersaus",
-      "1–2 tl sambal",
-      "Taugé",
-      "Bosui",
-      "Selderij"
-    ],
-    "steps": [
-      "Kook de noedels volgens de verpakking en spoel kort koud af.",
-      "Fruit knoflook, roerbak groenten op hoog vuur.",
-      "Voeg ketjap, sojasaus, oestersaus en sambal toe.",
-      "Schep noedels erdoor en bak kort mee.",
-      "Garneer met taugé, bosui en selderij."
-    ]
-  },
-  {
-    "title": "Geroosterde groente",
-    "category": "Diner",
-    "image": "",
-    "ingredients": [
-      "1 courgette",
-      "1 paprika",
-      "1 rode ui",
-      "2 el olijfolie",
-      "Peper",
-      "Zout"
-    ],
-    "steps": [
-      "Verwarm de oven voor op 200°C.",
-      "Snijd groente in stukken en meng met olie, peper en zout.",
-      "Rooster 30–35 minuten, schep halverwege om."
-    ]
-  },
-  {
-    "title": "Petjel Groenten",
-    "category": "Lunch",
-    "image": "",
-    "ingredients": [
-      "Groente naar keuze (boontjes, kool, taugé)",
-      "Pindasaus",
-      "Kroepoek"
-    ],
-    "steps": [
-      "Blancheer de groenten beetgaar.",
-      "Serveer met warme pindasaus en kroepoek."
-    ]
-  },
-  {
-    "title": "Volkoren Pannenkoek",
-    "category": "Ontbijt",
-    "image": "",
-    "ingredients": [
-      "250 g volkorenmeel",
-      "2 eieren",
-      "500 ml melk",
-      "Snuf zout",
-      "Boter of olie om te bakken"
-    ],
-    "steps": [
-      "Klop meel, eieren, melk en zout tot een glad beslag.",
-      "Bak porties in een koekenpan met wat vet."
-    ]
-  },
-  {
-    "title": "Zwarte Bonensaus",
-    "category": "Diner",
-    "image": "",
-    "ingredients": [
-      "1 blik zwarte bonen, afgespoeld",
-      "1 teentje knoflook, geperst",
-      "1–2 el sojasaus"
-    ],
-    "steps": [
-      "Prak de bonen grof met knoflook en sojasaus.",
-      "Warm kort op en serveer bij rijst of groente."
-    ]
-  },
-  {
-    "title": "Gepofte Aardappelen",
-    "category": "Diner",
-    "image": "",
-    "ingredients": [
-      "4 vastkokende aardappels",
-      "1 el olijfolie",
-      "Zout"
-    ],
-    "steps": [
-      "Wrijf aardappels in met olie en bestrooi met zout.",
-      "Pof 60 minuten in de oven op 200°C."
-    ]
-  },
-  {
-    "title": "Vega Shoarma Pita",
-    "category": "Diner",
-    "image": "",
-    "ingredients": [
-      "200 g vega shoarma",
-      "4 pitabroodjes",
-      "Sla",
-      "Knoflooksaus"
-    ],
-    "steps": [
-      "Bak de shoarma goudbruin.",
-      "Verwarm pitabroodjes.",
-      "Beleg met sla, shoarma en knoflooksaus."
-    ]
-  },
-  {
-    "title": "Vietnamese Summer Rolls",
-    "category": "Lunch",
-    "image": "",
-    "ingredients": [
-      "Rijstvellen",
-      "Sla",
-      "Komkommer in reepjes",
-      "Wortel in reepjes",
-      "Verse kruiden (munt/koriander)",
-      "Dipsaus (hoisinsaus of vissausdip)"
-    ],
-    "steps": [
-      "Week een rijstvel kort in warm water.",
-      "Vul met groente en kruiden.",
-      "Rol strak op en serveer met dipsaus."
-    ]
-  }
-]
+{
+  "recipes": [
+    {
+      "slug": "pompoensoep-basis",
+      "title": "Pompoensoep (basisrecept)",
+      "description": "Romige, zachte pompoensoep met wortel en ui. Makkelijk en snel.",
+      "image": "images/pompoen.png",
+      "time": "30 min",
+      "servings": "4",
+      "tags": [
+        "soep",
+        "pompoen",
+        "basis"
+      ],
+      "ingredients": [
+        "1 kg pompoen",
+        "1 ui",
+        "2 tenen knoflook",
+        "1 wortel",
+        "1 l groentebouillon",
+        "2 el olijfolie",
+        "peper & zout"
+      ],
+      "steps": [
+        "Fruit ui en knoflook 3–4 minuten.",
+        "Voeg pompoen en wortel toe en bak 5 minuten.",
+        "Voeg bouillon toe en kook 15 minuten.",
+        "Pureer en breng op smaak."
+      ]
+    }
+  ]
+}
