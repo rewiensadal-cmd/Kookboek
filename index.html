@@ -2,45 +2,197 @@
 <html lang="nl">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kookboek</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Rewien &amp; Anchelita – Kookboek</title>
+  <meta name="theme-color" content="#111827">
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.webmanifest">
 </head>
 <body>
-  <header class="topbar">
-    <button class="menu" aria-label="Menu" title="Menu">☰</button>
-    <a class="brand" href="./">Kookboek</a>
-    <nav class="icons">
-      <a href="#" aria-label="Scan">▦</a>
-      <a href="#" aria-label="Profiel">👤</a>
-      <a href="#" aria-label="Mandje">🛒</a>
-    </nav>
-  </header>
+  <header data-version="v19" class="topbar">
+    <div class="brand"><img src="icons/icon-192.png" class="favicon" alt=""> Rewien &amp; Anchelita</div>
+  <div class="version-badge">v19</div>
+</header>
 
-  <div class="search-wrap">
-    <label for="search" class="sr-only">Zoek recepten</label>
-    <input id="search" type="search" placeholder="Welke recepten zoek je?" autocomplete="off">
-  </div>
+  <nav class="navtabs">
+    <button class="tab active" data-cat="Alle">Alle</button>
+    <button class="tab" data-cat="Nieuw">Nieuw</button>
+    <button class="tab" data-cat="Ontbijt">Ontbijt</button>
+    <button class="tab" data-cat="Lunch">Lunch</button>
+    <button class="tab" data-cat="Diner">Diner</button>
+  </nav>
 
-  <main id="content">
-    <section class="intro">
-      <div class="intro-media">
-        <img src="images/pompoen.png" alt="Pompoensoep">
-      </div>
-      <div class="intro-text">
-        <h1>5x Pompoensoep</h1>
-        <p>Op een herfstige of zelfs winterse dag gaat er niets boven een bordje pompoensoep. Ontdek de varianten hieronder of zoek een ander recept.</p>
-        <a class="cta" href="#recepten">Bekijk recepten ↓</a>
-      </div>
+  <main class="container">
+    <input id="search" class="search" type="search" placeholder="Zoek een gerecht of ingrediënt…">
+    <ul id="grid" class="grid"></ul>
+    <p id="emptyState" class="muted" style="display:none">Nog geen gerechten…</p>
+
+    <!-- Nieuw recept tabpage -->
+    <section id="tab-new" class="tabpage hidden">
+      <form id="newFormFull">
+        <input type="hidden" id="editMode" value="false">
+        <input type="hidden" id="editIndex" value="-1" class="edit-form" autocomplete="off">
+        <h3>Nieuw recept</h3>
+        <label>Titel
+          <input id="nTitle" required>
+        </label>
+        <label>Categorie
+          <select id="nCategory">
+            <option>Ontbijt</option>
+            <option>Lunch</option>
+            <option>Diner</option>
+          </select>
+        </label>
+        <label>Foto (fotorol/camera)
+          <input id="nPhoto" type="file" accept="image/*" capture="environment">
+        </label>
+        <label>Afbeelding-URL (optioneel)
+          <input id="nImage" placeholder="https://…">
+        </label>
+        <label>Ingrediënten (één per regel)
+          <textarea id="nIngredients" rows="6" placeholder="Bijv. 2 eieren&#10;250 g meel&#10;..."></textarea>
+        </label>
+        <label>Bereidingswijze (één stap per regel)
+          <textarea id="nSteps" rows="6" placeholder="Stap 1&#10;Stap 2&#10;..."></textarea>
+        </label>
+        <div class="detail-actions">
+          <button id="nSaveFull" class="btn primary" type="submit">Toevoegen</button>
+        </div>
+        <p class="muted">Na toevoegen wordt automatisch een nieuwe <b>recipes.json</b> gedownload. Upload die naar je GitHub repo.</p>
+      </form>
     </section>
 
-    <h2 id="recepten">Recepten</h2>
-    <div id="cards" class="cards" aria-live="polite"></div>
   </main>
+  <button id="fabNew" class="fab" data-action="new" aria-label="Nieuw recept">+</button>
 
-  <footer class="site-footer">Gemaakt met ❤️ — GitHub Pages ready</footer>
 
-  <a href="add.html" class="fab" aria-label="Nieuw recept">＋</a>
+  <!-- Kaart template -->
+  <template id="cardTpl">
+    <li class="card recipe">
+      <img class="thumb" alt="">
+      <div class="body">
+        <h3 class="title"></h3>
+        <p class="subtitle"></p>
+      </div>
+    </li>
+  </template>
+
+  <!-- Fullscreen detail view -->
+  <div id="detail" class="detail hidden" role="dialog" aria-modal="true">
+    <header data-version="v19" class="detail-head">
+      <button id="backBtn" class="icon">←</button>
+      <div class="titles">
+        <h2 id="dTitle"></h2>
+        <div id="dCat" class="muted small"></div>
+      </div>
+      <button id="toListFromDetail" class="icon" title="Naar boodschappenlijst">🛒</button>
+      <button id="editBtn" class="icon btn-edit" data-action="edit" title="Bewerk">✎</button>
+    <div class="version-badge">v19</div>
+</header>
+    <div class="detail-body">
+      <img id="dImg" class="detail-hero" alt="">
+      <h3>Ingrediënten</h3>
+      <ul id="dIngr" class="checklist"></ul>
+      <h3>Bereidingswijze</h3>
+      <ol id="dSteps"></ol>
+      <div class="detail-actions">
+        <button id="sendToShopping" class="btn primary">Naar boodschappenlijst (alleen niet-afgevinkte)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Boodschappenlijst overlay/page -->
+  <div id="shopping" class="shopping hidden" role="dialog" aria-modal="true">
+    <header data-version="v19" class="shopping-head">
+      <button id="closeShopping" class="icon">←</button>
+      <h2>Boodschappenlijst</h2>
+    <div class="version-badge">v19</div>
+</header>
+    <div class="shopping-body">
+      <ul id="shoppingList" class="checklist"></ul>
+      <button id="clearShopping" class="btn danger">Clear lijst</button>
+    </div>
+  </div>
+
   <script src="app.js"></script>
+  <script>
+    if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js'));}
+  </script>
+
+  <!-- Floating add button -->
+  <button id="fabAdd" class="fab" title="Nieuw recept">＋</button>
+
+  <!-- Nieuw recept dialog -->
+  <dialog id="newDialog">
+    <form method="dialog" id="newForm" class="edit-form">
+      <h3>Nieuw recept</h3>
+      <label>Titel
+        <input id="nTitle" required>
+      </label>
+      <label>Categorie
+        <select id="nCategory">
+          <option>Ontbijt</option>
+          <option>Lunch</option>
+          <option>Diner</option>
+        </select>
+      </label>
+      <label>Foto (fotorol/camera)
+        <input id="nPhoto" type="file" accept="image/*" capture="environment">
+      </label>
+      <label>Afbeelding-URL
+        <input id="nImage" placeholder="https://… (optioneel)">
+      </label>
+      <label>Ingrediënten (één per regel)
+        <textarea id="nIngredients" rows="6" placeholder="Bijv. 2 eieren&#10;250 g meel&#10;..."></textarea>
+      </label>
+      <label>Bereidingswijze (één stap per regel)
+        <textarea id="nSteps" rows="6" placeholder="Stap 1&#10;Stap 2&#10;..."></textarea>
+      </label>
+      <menu>
+        <button value="cancel">Annuleren</button>
+        <button id="nSave" value="save">Toevoegen</button>
+      </menu>
+      <p class="muted">Na toevoegen wordt automatisch een nieuwe <b>recipes.json</b> gedownload. Upload die naar je GitHub repo.</p>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <!-- Bewerken dialog -->
+  <dialog id="editDialog">
+    <form method="dialog" id="editForm" class="edit-form">
+      <h3>Recept bewerken</h3>
+      <label>Titel
+        <input id="eTitle" required>
+      </label>
+      <label>Categorie
+        <select id="eCategory">
+          <option>Ontbijt</option>
+          <option>Lunch</option>
+          <option>Diner</option>
+        </select>
+      </label>
+      <label>Huidige foto</label>
+      <img id="ePreview" alt="" style="max-width:100%; border:1px solid var(--line); border-radius:12px; display:block;">
+      <label>Nieuwe foto (optioneel, vervangt de huidige)
+        <input id="ePhoto" type="file" accept="image/*" capture="environment">
+      </label>
+      <label>Of afbeelding-URL (optioneel)
+        <input id="eImageUrl" placeholder="https://…">
+      </label>
+      <label>Ingrediënten (één per regel)
+        <textarea id="eIngredients" rows="6"></textarea>
+      </label>
+      <label>Bereidingswijze (één stap per regel)
+        <textarea id="eSteps" rows="6"></textarea>
+      </label>
+      <menu>
+        <button value="cancel">Annuleren</button>
+        <button id="eSave" value="save">Opslaan</button>
+      </menu>
+      <p class="muted">Na opslaan wordt automatisch een nieuwe <b>recipes.json</b> gedownload. Upload die naar GitHub.</p>
+    </form>
+  </dialog>
 </body>
 </html>
+

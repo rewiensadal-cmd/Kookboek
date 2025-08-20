@@ -1,0 +1,106 @@
+:root{--bg:#0b0f1a;--panel:#121a2a;--muted:#9fb3c8;--text:#e8f0f7;--primary:#3b82f6;--danger:#ef4444;--line:#1e2a3d;--radius:16px}
+*{box-sizing:border-box}html,body{height:100%}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+.topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;background:linear-gradient(90deg,#0f172a,#111827 60%);border-bottom:1px solid var(--line)}
+.brand{font-weight:800;display:flex;align-items:center;gap:10px}.favicon{width:26px;height:26px;border-radius:6px}
+.icon{background:transparent;border:1px solid var(--line);color:var(--text);border-radius:10px;padding:6px 10px;font-weight:800;cursor:pointer}
+.navtabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:10px;position:sticky;top:54px;background:rgba(8,12,20,.6);backdrop-filter:blur(8px);z-index:20}
+.tab{padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--muted);font-weight:700;cursor:pointer}
+.tab.active{background:linear-gradient(180deg,#0f1a35,#0c1426);color:var(--text);border-color:#274169}
+.container{max-width:980px;margin:0 auto;padding:12px}
+.search{width:100%;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:#0b1424;color:var(--text);margin:10px 0}
+.grid{list-style:none;padding:0;margin:0;display:grid;gap:12px;grid-template-columns:1fr 1fr}
+@media(max-width:780px){.grid{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 8px 20px rgba(0,0,0,.25);overflow:hidden;cursor:pointer}
+.recipe .thumb{width:100%;aspect-ratio:16/10;object-fit:cover;background:#0a1220}
+.recipe .body{padding:12px}.recipe .title{margin:0 0 6px}.recipe .subtitle{margin:0;color:var(--muted)}
+.muted{color:var(--muted)}.small{font-size:.9rem}
+
+.detail{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;z-index:50}
+.detail.hidden{display:none}
+.detail-head{position:sticky;top:0;display:flex;align-items:center;gap:12px;padding:10px 12px;border-bottom:1px solid var(--line);background:linear-gradient(90deg,#0f172a,#111827 60%)}
+.titles h2{margin:0}.detail-hero{width:100%;max-height:48vh;object-fit:cover;border-bottom:1px solid var(--line)}
+.detail-body{padding:12px} .detail-body h3{margin:10px 0 8px}
+.detail-body ul{padding-left:18px} .detail-body ol{padding-left:18px}
+.detail-actions{margin-top:12px;display:flex;justify-content:flex-end}
+.btn{border:1px solid var(--line);background:#0f1729;color:var(--text);border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer}
+.btn.primary{background:linear-gradient(180deg,#2563eb,#1d4ed8);border-color:#1d4ed8}
+
+.checklist li{list-style:none;margin:6px 0;display:flex;gap:10px;align-items:flex-start}
+.checklist input[type=checkbox]{transform:scale(1.3);margin-top:2px}
+.checklist .done{opacity:.6;text-decoration:line-through}
+
+.shopping{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;z-index:60}
+.shopping.hidden{display:none}
+.shopping-head{position:sticky;top:0;display:flex;align-items:center;gap:12px;padding:10px 12px;border-bottom:1px solid var(--line);background:linear-gradient(90deg,#0f172a,#111827 60%)}
+.shopping-body{padding:12px;display:flex;flex-direction:column;gap:12px;min-height:0}
+#shoppingList{padding-left:0}
+.btn.danger{background:linear-gradient(180deg,#ef4444,#dc2626);border-color:#b91c1c}
+
+
+/* --- Scroll fix for iOS Safari --- */
+.detail{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;z-index:50;max-height:100vh;overflow:hidden}
+.detail.hidden{display:none}
+.detail-head{position:sticky;top:0;display:flex;align-items:center;gap:12px;padding:10px 12px;border-bottom:1px solid var(--line);background:linear-gradient(90deg,#0f172a,#111827 60%);z-index:1}
+.titles h2{margin:0}
+.detail-hero{width:100%;max-height:40vh;object-fit:cover;border-bottom:1px solid var(--line)}
+.detail-body{flex:1;min-height:0;overflow:auto;-webkit-overflow-scrolling:touch;padding:12px 12px 120px}
+
+
+/* Global scroll safety */
+html, body { min-height:100%; height:auto; overflow:auto; -webkit-overflow-scrolling: touch; }
+.container { min-height: 60vh; }
+
+
+/* FAB add button */
+.fab{
+  position:fixed; right:16px; bottom:18px; z-index:70;
+  width:56px; height:56px; border-radius:50%;
+  background:linear-gradient(180deg,#2563eb,#1d4ed8);
+  color:#fff; border:none; box-shadow:0 8px 20px rgba(0,0,0,.35);
+  font-size:28px; line-height:0; display:grid; place-items:center; cursor:pointer;
+}
+/* Reuse edit-form styles for newDialog */
+#newDialog{ border:none; border-radius:16px; padding:16px; max-width:640px; width:95% }
+
+
+/* Sticky hero image: stays fixed under the title while content scrolls */
+.detail{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;z-index:50;max-height:100vh;overflow:hidden}
+.detail-head{position:sticky;top:0;z-index:2}
+.detail-body{flex:1;min-height:0;overflow:auto;-webkit-overflow-scrolling:touch;padding:0 0 120px}
+.detail-hero{position:sticky;top:0;z-index:1;width:100%;max-height:40vh;object-fit:cover;border-bottom:1px solid var(--line);background:#0a1220;display:block}
+.detail-body h3, .detail-body ul, .detail-body ol, .detail-actions{padding:12px}
+
+
+/* --- Patch: non-sticky hero image (everything scrolls together) --- */
+.detail{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;z-index:50;max-height:100vh;overflow:hidden}
+.detail-head{position:sticky;top:0;z-index:2}
+.detail-body{flex:1;min-height:0;overflow:auto;-webkit-overflow-scrolling:touch;padding:0 0 120px}
+.detail-hero{position:static;top:auto;z-index:auto;width:100%;max-height:none;object-fit:cover;border-bottom:1px solid var(--line);background:#0a1220;display:block}
+.detail-body h3, .detail-body ul, .detail-body ol, .detail-actions{padding:12px}
+
+.toast{
+  position:fixed; left:50%; bottom:24px; transform:translateX(-50%) translateY(20px);
+  background:#0f1729; color:#e8f0f7; border:1px solid #1e2a3d; border-radius:12px;
+  padding:10px 14px; box-shadow:0 10px 24px rgba(0,0,0,.35); opacity:0; pointer-events:none;
+  transition:transform .25s ease, opacity .25s ease; z-index:90; font-weight:700;
+}
+.toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+#editDialog{ border:none; border-radius:16px; padding:16px; max-width:640px; width:95% }
+
+.btn-edit{ cursor:pointer; }
+
+
+/* Tab pages */
+.tabpage{ display:none; }
+.tabpage.show{ display:block; }
+
+.icon{cursor:pointer}
+
+.version-badge{
+  position:absolute; top:10px; right:10px;
+  background:#22c55e; color:#06121f; font-weight:700;
+  padding:4px 8px; border-radius:8px; font-size:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,.25); z-index:80;
+}
+header{ position:relative; }
