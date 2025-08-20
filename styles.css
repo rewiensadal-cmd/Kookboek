@@ -29,3 +29,23 @@ h2{font-size:24px;margin:18px 0 8px}
 /* FAB */
 .fab{position:fixed;right:20px;bottom:20px;background:var(--brand);color:#000;font-size:32px;font-weight:800;text-decoration:none;border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.22)}
 .fab:hover{filter:brightness(1.05)}
+
+
+/* Kleuren per tag categorie */
+.tag { 
+  border-radius:999px; 
+  padding:4px 10px; 
+  font-size:12px; 
+  font-weight:600; 
+  color:#fff; 
+}
+.tag.ontbijt { background:#ff9800; }  /* oranje */
+.tag.lunch{background:#fbc02d;color:#fff}  /* blauw */
+.tag.diner   { background:#4caf50; }  /* groen */
+
+
+/* Tag kleurcodes per categorie */
+.tag{background:#f2f2f2;border-radius:999px;padding:4px 10px;font-size:12px}
+.tag.ontbijt{background:#ff9800;color:#fff}
+.tag.lunch{background:#2196f3;color:#fff}
+.tag.diner{background:#4caf50;color:#fff}

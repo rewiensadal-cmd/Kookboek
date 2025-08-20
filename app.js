@@ -1,3 +1,10 @@
+
+function tagClass(name){
+  return (name||'').toString().trim().toLowerCase()
+    .normalize('NFD').replace(/\p{Diacritic}/gu,'')   // strip accents
+    .replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
+}
+
 async function getData(){ const res = await fetch('recipes.json'); return await res.json(); }
 function card(recipe){
   return `<article class="card">
@@ -6,7 +13,7 @@ function card(recipe){
       <div class="body">
         <h3>${recipe.title}</h3>
         <p>${recipe.description}</p>
-        <div class="tags">${recipe.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+        <div class="tags">${recipe.tags.map(t=>`<span class="tag ${t.toLowerCase()}">${t}</span>`).join('')}</div>
       </div>
     </a>
   </article>`;
@@ -28,7 +35,7 @@ async function loadRecipe(slug){
   document.getElementById('r-desc').textContent = r.description;
   document.getElementById('r-time').textContent = r.time;
   document.getElementById('r-servings').textContent = r.servings;
-  document.getElementById('r-tags').innerHTML = r.tags.map(t=>`<span class="tag">${t}</span>`).join('');
+  document.getElementById('r-tags').innerHTML = r.tags.map(t=>`<span class="tag ${t.toLowerCase()}">${t}</span>`).join('');
   document.getElementById('r-ingredients').innerHTML = r.ingredients.map(i=>`<li><label><input type="checkbox"> ${i}</label></li>`).join('');
   document.getElementById('r-steps').innerHTML = r.steps.map(s=>`<li>${s}</li>`).join('');
 }
