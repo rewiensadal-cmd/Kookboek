@@ -41,13 +41,10 @@
     </article>
   </main>
 
-  <footer class="site-footer">
-    <a href="./">⬅ Terug naar alle recepten</a>
-  </footer>
+  <footer class="site-footer"><a href="./">⬅ Terug naar alle recepten</a></footer>
 
   <script src="app.js"></script>
   <script>
-    // laad recept op basis van ?slug=... 
     const params = new URLSearchParams(location.search);
     const slug = params.get('slug');
     loadRecipe(slug);

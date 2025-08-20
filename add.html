@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nieuw recept toevoegen</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .box{background:#fff;border-radius:14px;box-shadow:var(--shadow);padding:16px;margin:16px auto;max-width:760px}
+    .grid{display:grid;gap:12px}.grid-2{grid-template-columns:1fr 1fr}
+    label{font-weight:600} input,textarea{width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:10px;font:inherit}
+    textarea{min-height:90px} .hint{color:var(--muted);font-size:.9em}
+    button{padding:12px 14px;border:0;border-radius:10px;background:var(--brand);font-weight:800;cursor:pointer}
+    .danger{background:#ee4444;color:#fff} pre{white-space:pre-wrap;background:#fafafa;border:1px solid #eee;border-radius:10px;padding:12px}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="back" href="./" aria-label="Terug">←</a>
+    <span class="brand">Nieuw recept</span>
+    <span></span>
+  </header>
+
+  <main>
+    <section class="box">
+      <h2>Recept</h2>
+      <form id="recipe-form" class="grid">
+        <div class="grid grid-2">
+          <div><label>Titel<input name="title" required></label></div>
+          <div><label>Slug (uniek, klein)<input name="slug" placeholder="bv. tomatensoep" required></label></div>
+        </div>
+        <div><label>Beschrijving<textarea name="description" placeholder="Korte teaser"></textarea></label></div>
+        <div class="grid grid-2">
+          <div><label>Tijd<input name="time" value="30 min"></label></div>
+          <div><label>Porties<input name="servings" value="4"></label></div>
+        </div>
+        <div><label>Tags (komma’s)<input name="tags" placeholder="soep, snel"></label></div>
+        <div class="grid grid-2">
+          <div><label>Ingrediënten (één per regel)<textarea name="ingredients"></textarea></label></div>
+          <div><label>Bereiding (één stap per regel)<textarea name="steps"></textarea></label></div>
+        </div>
+        <div><label>Afbeelding<input type="file" name="imageFile" accept="image/*"></label>
+          <div class="hint">Wordt geüpload naar <code>images/&lt;slug&gt;.png</code>.</div>
+        </div>
+        <details><summary>JSON voorbeeld</summary><pre id="json-preview"></pre></details>
+        <button type="submit">Commit naar GitHub →</button>
+      </form>
+    </section>
+
+    <section class="box">
+      <h2>GitHub instellingen</h2>
+      <div class="grid grid-2">
+        <label>Owner<input id="gh-owner" placeholder="jouw-naam" required></label>
+        <label>Repo<input id="gh-repo" placeholder="kookboek" required></label>
+      </div>
+      <div class="grid grid-2">
+        <label>Branch<input id="gh-branch" value="main" required></label>
+        <label>Persoonlijke access token<input id="gh-token" type="password" placeholder="ghp_..." required></label>
+      </div>
+      <p class="hint">Maak een fine‑grained token met **Contents: Read & Write** op deze repo. Het token blijft alleen in deze browser (localStorage).</p>
+      <button id="save-gh">Instellingen opslaan (lokaal)</button>
+      <button id="clear-gh" class="danger">Verwijderen</button>
+      <div id="status" class="hint" style="margin-top:8px;"></div>
+    </section>
+
+    <section class="box">
+      <h2>Resultaat</h2>
+      <pre id="result">Nog niets uitgevoerd…</pre>
+    </section>
+  </main>
+
+  <script>
+    const el = id => document.getElementById(id);
+    const toBase64 = async (file) => {
+      const buf = await file.arrayBuffer();
+      let binary = ''; const bytes = new Uint8Array(buf);
+      for (let i = 0; i < bytes.byteLength; i++) binary += String.fromCharCode(bytes[i]);
+      return btoa(binary);
+    };
+    // Settings
+    const loadSettings = () => ({
+      owner: localStorage.getItem('gh_owner') || '',
+      repo: localStorage.getItem('gh_repo') || '',
+      branch: localStorage.getItem('gh_branch') || 'main',
+      token: localStorage.getItem('gh_token') || ''
+    });
+    const saveSettings = () => {
+      localStorage.setItem('gh_owner', el('gh-owner').value.trim());
+      localStorage.setItem('gh_repo', el('gh-repo').value.trim());
+      localStorage.setItem('gh_branch', el('gh-branch').value.trim());
+      localStorage.setItem('gh_token', el('gh-token').value.trim());
+      el('status').textContent = 'Instellingen opgeslagen in deze browser.';
+    };
+    const clearSettings = () => {
+      ['gh_owner','gh_repo','gh_branch','gh_token'].forEach(k => localStorage.removeItem(k));
+      ['gh-owner','gh-repo','gh-branch','gh-token'].forEach(id => el(id).value='');
+      el('status').textContent = 'Instellingen verwijderd.';
+    };
+    const s = loadSettings();
+    el('gh-owner').value = s.owner; el('gh-repo').value = s.repo; el('gh-branch').value = s.branch; el('gh-token').value = s.token;
+    el('save-gh').addEventListener('click', saveSettings);
+    el('clear-gh').addEventListener('click', clearSettings);
+
+    // live preview
+    const form = document.getElementById('recipe-form');
+    const preview = document.getElementById('json-preview');
+    form.addEventListener('input', () => {
+      const fd = new FormData(form);
+      const slug = (fd.get('slug')||'').trim().toLowerCase().replace(/[^a-z0-9-]/g,'-');
+      const obj = {
+        slug, title:(fd.get('title')||'').trim(), description:(fd.get('description')||'').trim(),
+        image:`images/${slug}.png`, time:(fd.get('time')||'30 min').trim(), servings:(fd.get('servings')||'4').trim(),
+        tags:(fd.get('tags')||'').split(',').map(t=>t.trim()).filter(Boolean),
+        ingredients:(fd.get('ingredients')||'').split('\n').map(s=>s.trim()).filter(Boolean),
+        steps:(fd.get('steps')||'').split('\n').map(s=>s.trim()).filter(Boolean)
+      };
+      preview.textContent = JSON.stringify(obj, null, 2);
+    });
+
+    // GitHub helpers
+    async function ghFetch(path, {method='GET', body, token}){
+      const res = await fetch(`https://api.github.com${path}`, {
+        method,
+        headers: {'Authorization': `Bearer ${token}`, 'Accept':'application/vnd.github+json'},
+        body: body ? JSON.stringify(body) : undefined
+      });
+      const data = await res.json().catch(()=>({}));
+      if(!res.ok) throw new Error(data.message || res.statusText);
+      return data;
+    }
+    async function getFile(owner, repo, path, ref, token){
+      return ghFetch(`/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(ref)}`, {token});
+    }
+    async function putFile(owner, repo, path, message, contentBase64, branch, sha, token){
+      return ghFetch(`/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}`, {
+        method:'PUT', token, body:{message, content:contentBase64, branch, sha}
+      });
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const owner = el('gh-owner').value.trim();
+      const repo = el('gh-repo').value.trim();
+      const branch = el('gh-branch').value.trim();
+      const token = el('gh-token').value.trim();
+      if(!owner || !repo || !branch || !token){ el('result').textContent='Vul eerst de GitHub instellingen in.'; return; }
+
+      const fd = new FormData(form);
+      const slug = (fd.get('slug')||'').trim().toLowerCase().replace(/[^a-z0-9-]/g,'-');
+      const recipe = {
+        slug, title:(fd.get('title')||'').trim(), description:(fd.get('description')||'').trim(),
+        image:`images/${slug}.png`, time:(fd.get('time')||'30 min').trim(), servings:(fd.get('servings')||'4').trim(),
+        tags:(fd.get('tags')||'').split(',').map(t=>t.trim()).filter(Boolean),
+        ingredients:(fd.get('ingredients')||'').split('\n').map(s=>s.trim()).filter(Boolean),
+        steps:(fd.get('steps')||'').split('\n').map(s=>s.trim()).filter(Boolean)
+      };
+
+      try{
+        el('result').textContent='Ophalen van recipes.json…';
+        const file = await getFile(owner, repo, 'recipes.json', branch, token);
+        const current = JSON.parse(atob(file.content.replace(/\n/g,'')));
+        if(current.recipes.find(r => r.slug === slug)) throw new Error('Er bestaat al een recept met deze slug.');
+        current.recipes.push(recipe);
+        const newJson = JSON.stringify(current, null, 2);
+        const newB64 = btoa(unescape(encodeURIComponent(newJson)));
+
+        // image upload
+        const imageFile = fd.get('imageFile');
+        if(imageFile && imageFile.size){
+          el('result').textContent='Afbeelding uploaden…';
+          const imgB64 = await toBase64(imageFile);
+          await putFile(owner, repo, `images/${slug}.png`, `feat: add image for ${slug}`, imgB64, branch, undefined, token);
+        }
+
+        el('result').textContent='Wijziging committen…';
+        await putFile(owner, repo, 'recipes.json', `feat: add recipe ${slug}`, newB64, branch, file.sha, token);
+        el('result').textContent=`Gelukt! Recept '${recipe.title}' toegevoegd. Keer terug naar de homepage om het te zien.`;
+      }catch(err){
+        el('result').textContent='Fout: ' + err.message;
+      }
+    });
+  </script>
+</body>
+</html>

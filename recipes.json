@@ -13,75 +13,19 @@
         "basis"
       ],
       "ingredients": [
-        "1 kg pompoen, in blokjes",
-        "1 ui, gesnipperd",
-        "2 tenen knoflook, fijngesneden",
-        "1 wortel, in stukjes",
+        "1 kg pompoen",
+        "1 ui",
+        "2 tenen knoflook",
+        "1 wortel",
         "1 l groentebouillon",
         "2 el olijfolie",
-        "peper & zout naar smaak"
+        "peper & zout"
       ],
       "steps": [
-        "Fruit ui en knoflook in olijfolie 3–4 minuten.",
-        "Voeg pompoen en wortel toe en bak 5 minuten mee.",
-        "Schenk bouillon erbij en laat 15 minuten zacht koken.",
-        "Pureer tot een gladde soep en breng op smaak."
-      ]
-    },
-    {
-      "slug": "pompoensoep-spicy",
-      "title": "Spicy pompoensoep",
-      "description": "Met chili en gember voor een lekkere kick.",
-      "image": "images/spicy.png",
-      "time": "35 min",
-      "servings": "4",
-      "tags": [
-        "soep",
-        "pompoen",
-        "pittig"
-      ],
-      "ingredients": [
-        "1 kg pompoen, in blokjes",
-        "1 ui, gesnipperd",
-        "2 cm gember, geraspt",
-        "1 rode chili, in ringetjes",
-        "1 l groentebouillon",
-        "1 limoen, sap",
-        "2 el olie, peper & zout"
-      ],
-      "steps": [
-        "Fruit ui, gember en chili 4 minuten.",
-        "Voeg pompoen toe en bak 5 minuten.",
-        "Bouillon erbij, 15–20 minuten koken.",
-        "Pureren en afmaken met limoensap."
-      ]
-    },
-    {
-      "slug": "pompoensoep-kokos",
-      "title": "Romige pompoensoep met kokos",
-      "description": "Extra romig door kokosmelk, met een hint van kerrie.",
-      "image": "images/kokos.png",
-      "time": "30 min",
-      "servings": "4",
-      "tags": [
-        "soep",
-        "pompoen",
-        "kokos",
-        "romig"
-      ],
-      "ingredients": [
-        "800 g pompoen, in blokjes",
-        "1 ui, gesnipperd",
-        "1 el kerriepoeder",
-        "750 ml groentebouillon",
-        "200 ml kokosmelk",
-        "2 el olie, peper & zout"
-      ],
-      "steps": [
-        "Bak ui 3 minuten in olie, voeg kerrie toe.",
-        "Voeg pompoen toe en bak 3 minuten.",
-        "Giet bouillon erbij en kook 15 minuten.",
-        "Pureer en roer kokosmelk erdoor; op smaak brengen."
+        "Fruit ui en knoflook 3–4 minuten.",
+        "Voeg pompoen en wortel toe en bak 5 minuten.",
+        "Voeg bouillon toe en kook 15 minuten.",
+        "Pureer en breng op smaak."
       ]
     }
   ]
