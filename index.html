@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kookboek</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍲</text></svg>">
+  <meta name="description" content="Een simpel HTML-kookboek dat je via GitHub Pages kunt hosten.">
+</head>
+<body>
+  <header class="topbar">
+    <button class="menu" aria-label="Menu" title="Menu">☰</button>
+    <a class="brand" href="./">Kookboek</a>
+    <nav class="icons">
+      <a href="#" aria-label="Scan"><span>▦</span></a>
+      <a href="#" aria-label="Profiel"><span>👤</span></a>
+      <a href="#" aria-label="Mandje"><span>🛒</span></a>
+    </nav>
+  </header>
+
+  <div class="search-wrap">
+    <label for="search" class="sr-only">Zoek recepten</label>
+    <input id="search" type="search" placeholder="Welke recepten zoek je?" autocomplete="off">
+  </div>
+
+  <main id="content">
+    <section class="intro">
+      <div class="intro-media">
+        <img src="images/pompoen.png" alt="Pompoensoep">
+      </div>
+      <div class="intro-text">
+        <h1>5x Pompoensoep</h1>
+        <p>Op een herfstige of zelfs winterse dag gaat er niets boven een bordje pompoensoep. De lekkerste maak je natuurlijk zelf. Ontdek de varianten hieronder of zoek een ander recept.</p>
+        <a class="cta" href="#recepten">Bekijk recepten ↓</a>
+      </div>
+    </section>
+
+    <h2 id="recepten">Recepten</h2>
+    <div id="cards" class="cards" aria-live="polite"></div>
+  </main>
+
+  <footer class="site-footer">
+    Gemaakt met ❤️ — <a href="https://github.com" target="_blank" rel="noreferrer">GitHub Pages ready</a>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

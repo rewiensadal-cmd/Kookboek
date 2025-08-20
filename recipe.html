@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recept — Kookboek</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="back" href="./" aria-label="Terug">←</a>
+    <a class="brand" href="./">Kookboek</a>
+    <span class="spacer"></span>
+  </header>
+
+  <main id="recipe-page">
+    <article class="recipe">
+      <div class="recipe-hero">
+        <img id="r-image" alt="">
+        <div class="recipe-hero-text">
+          <h1 id="r-title"></h1>
+          <p id="r-desc" class="muted"></p>
+          <div id="r-tags" class="tags"></div>
+        </div>
+      </div>
+
+      <div class="meta">
+        <div><strong>Tijd:</strong> <span id="r-time"></span></div>
+        <div><strong>Porties:</strong> <span id="r-servings"></span></div>
+      </div>
+
+      <section>
+        <h2>Ingrediënten</h2>
+        <ul id="r-ingredients" class="ingredients"></ul>
+      </section>
+
+      <section>
+        <h2>Bereiding</h2>
+        <ol id="r-steps" class="steps"></ol>
+      </section>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <a href="./">⬅ Terug naar alle recepten</a>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+    // laad recept op basis van ?slug=... 
+    const params = new URLSearchParams(location.search);
+    const slug = params.get('slug');
+    loadRecipe(slug);
+  </script>
+</body>
+</html>
