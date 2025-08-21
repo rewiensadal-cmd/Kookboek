@@ -113,3 +113,26 @@ h2{font-size:24px;margin:18px 0 8px}
 .chip.ontbijt.active{ box-shadow:0 0 0 3px rgba(255,152,0,.3); }
 .chip.lunch.active{ box-shadow:0 0 0 3px rgba(255,235,59,.3); }
 .chip.diner.active{ box-shadow:0 0 0 3px rgba(76,175,80,.3); }
+
+
+/* Filterchips mooi uitgelijnd over de breedte */
+.filter-bar{
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+}
+.filter-bar .chip{
+  flex:1;
+  text-align:center;
+}
+
+
+/* Chips gelijke hoogte en grotere klikvlakken */
+.filter-bar .chip{
+  flex:1;
+  text-align:center;
+  padding:12px 0;
+  font-size:16px;
+  border-radius:8px;
+  cursor:pointer;
+}
