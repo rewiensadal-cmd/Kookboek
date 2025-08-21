@@ -24,9 +24,9 @@
 
   <div id="filters" class="filters" aria-label="Filter op type">
     <button data-tag="" class="chip active">Alles</button>
-    <button data-tag="Ontbijt" class="chip ontbijt">Ontbijt</button>
-    <button data-tag="Lunch" class="chip lunch">Lunch</button>
-    <button data-tag="Diner" class="chip diner">Diner</button>
+    <button data-tag="Ontbijt" class="chip">Ontbijt</button>
+    <button data-tag="Lunch" class="chip">Lunch</button>
+    <button data-tag="Diner" class="chip">Diner</button>
   </div>
 
   <main id="content">
@@ -40,22 +40,5 @@
 
   <a href="add.html" class="fab" aria-label="Nieuw recept">＋</a>
   <script src="app.js"></script>
-
-  <div id="toast" class="toast"></div>
-  <script>
-    function showToast(msg) {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.className = "toast show";
-      setTimeout(() => { t.className = "toast"; }, 4000);
-    }
-
-    const saved = localStorage.getItem('recipeSaved');
-    if (saved) {
-      showToast(`Recept "${saved}" succesvol opgeslagen!`);
-      localStorage.removeItem('recipeSaved');
-    }
-  </script>
-
 </body>
 </html>
