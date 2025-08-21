@@ -3,7 +3,7 @@
     {
       "slug": "recept-1-vega-surinaamse-bami-chaumin",
       "title": "Vega Surinaamse Bami Chaumin",
-      "description": "Snel gerecht met –300 g Chinese eiernoedels, tempeh of tofu en –3 el sojasaus. Kort en duidelijk bereid in een paar stappen.",
+      "description": "Snel gerecht met â300 g Chinese eiernoedels, tempeh of tofu en â3 el sojasaus. Kort en duidelijk bereid in een paar stappen.",
       "image": "images/recept-1-vega-surinaamse-bami-chaumin.png",
       "time": "ca. 30 min",
       "servings": "3-4",
@@ -11,15 +11,15 @@
         "Diner"
       ],
       "ingredients": [
-        "250–300 g Chinese eiernoedels (of vegan mie/noedels)",
+        "250â300 g Chinese eiernoedels (of vegan mie/noedels)",
         "1 blok (200 g) tempeh of tofu, in blokjes",
-        "2–3 el sojasaus",
+        "2â3 el sojasaus",
         "1 el ketjap manis",
         "1 el maggi",
         "1 ui (ringen), 2 teentjes knoflook (gehakt)",
         "1 paprika, 1 wortel (julienne), 200 g witte kool",
-        "Optioneel: taugé, bosui, selderij",
-        "1 tl zwarte peper, ½ tl 5-spice",
+        "Optioneel: taugÃ©, bosui, selderij",
+        "1 tl zwarte peper, Â½ tl 5-spice",
         "Olie"
       ],
       "steps": [
@@ -27,14 +27,14 @@
         "Marineer tempeh/tofu kort in sojasaus en bak goudbruin.",
         "Wok ui, knoflook en groenten kort op hoog vuur.",
         "Voeg noedels toe met ketjap, maggi, peper en 5-spice.",
-        "Schep alles goed om en serveer met taugé/bosui/selderij."
+        "Schep alles goed om en serveer met taugÃ©/bosui/selderij."
       ]
     },
     {
       "slug": "recept-2-geroosterde-groenten-met-tahin-yoghurtdressing",
-      "title": "Recept 2 â Geroosterde groenten met Tahin-Yoghurtdressing",
+      "title": "Geroosterde groenten met Tahin-Yoghurtdressing",
       "description": "Snel gerecht met kikkererwten, broccoli en Olijfolie. Kort en duidelijk bereid in een paar stappen.",
-      "image": "images/placeholder.png",
+      "image": "images/recept-2-geroosterde-groenten-met-tahin-yoghurtdressing.png",
       "time": "45 min",
       "servings": "4",
       "tags": [
@@ -45,14 +45,13 @@
         "1 ui, 2 zoete aardappels (blokjes)",
         "150 g broccoli, 150 g bloemkool",
         "Olijfolie, paprikapoeder, komijn, chili, zout, peper",
-        "",
         "2 el tahin, 120 g yoghurt",
         "2 el citroensap, 1 knoflook",
         "2 el olijfolie, 1 tl mosterd",
         "1 tl honing/agave, zout, peper"
       ],
       "steps": [
-        "Verwarm oven op 200 Â°C.",
+        "Verwarm oven op 200 °C.",
         "Verdeel kikkererwten en groenten op bakplaat, besprenkel met olie en kruiden. Rooster 25â30 min.",
         "Maak dressing: tahin, yoghurt, citroensap, knoflook, olie, mosterd, honing mengen.",
         "Serveer groenten met dressing, eventueel met peterselie of sesam."
@@ -60,8 +59,8 @@
     },
     {
       "slug": "recept-3-petjel-groenten-met-pindasaus",
-      "title": "Recept 3 â Petjel Groenten met Pindasaus",
-      "description": "Snel gerecht met kousenband, spitskool en taugÃ©. Kort en duidelijk bereid in een paar stappen.",
+      "title": "Recept 3 Ã¢ÂÂ Petjel Groenten met Pindasaus",
+      "description": "Snel gerecht met kousenband, spitskool en taugÃÂ©. Kort en duidelijk bereid in een paar stappen.",
       "image": "images/placeholder.png",
       "time": "20 min",
       "servings": "6",
@@ -71,7 +70,7 @@
       "ingredients": [
         "300 g kousenband (of sperziebonen)",
         "300 g spitskool",
-        "250 g taugÃ©",
+        "250 g taugÃÂ©",
         "200 g Faja Lobi Petjel Trafasie (pindasaus)",
         "2 plakjes Madam Jeanette peper"
       ],
@@ -83,7 +82,7 @@
     },
     {
       "slug": "recept-4-volkoren-pannenkoeken",
-      "title": "Recept 4 â Volkoren Pannenkoeken",
+      "title": "Recept 4 Ã¢ÂÂ Volkoren Pannenkoeken",
       "description": "Snel gerecht met Koopmans Pannenkoeken Volkoren, melk en Boter of olie. Kort en duidelijk bereid in een paar stappen.",
       "image": "images/placeholder.png",
       "time": "30 min",
@@ -106,7 +105,7 @@
     },
     {
       "slug": "recept-5-zwarte-bonensaus",
-      "title": "Recept 5 â Zwarte Bonensaus",
+      "title": "Recept 5 Ã¢ÂÂ Zwarte Bonensaus",
       "description": "Snel gerecht met zwarte bonen, ketjap en Specerijen naar smaak. Kort en duidelijk bereid in een paar stappen.",
       "image": "images/placeholder.png",
       "time": "20 min",
@@ -128,10 +127,10 @@
     },
     {
       "slug": "recept-6-gepofte-aardappelen-in-airfryer",
-      "title": "Recept 6 â Gepofte Aardappelen in Airfryer",
+      "title": "Recept 6 Ã¢ÂÂ Gepofte Aardappelen in Airfryer",
       "description": "Snel gerecht met aardappelen, olijfolie en zeezout. Kort en duidelijk bereid in een paar stappen.",
       "image": "images/placeholder.png",
-      "time": "30â45 min",
+      "time": "30Ã¢ÂÂ45 min",
       "servings": "4",
       "tags": [
         "Diner"
@@ -139,21 +138,21 @@
       "ingredients": [
         "4 middelgrote aardappelen",
         "2 el olijfolie",
-        "1 tl zeezout, Â½ tl peper",
+        "1 tl zeezout, ÃÂ½ tl peper",
         "1 tl knoflookpoeder, 1 tl paprikapoeder",
-        "Â½ tl tijm of rozemarijn",
-        "Toppings: crÃ¨me fraÃ®che, kaas, bieslook, spekjes",
+        "ÃÂ½ tl tijm of rozemarijn",
+        "Toppings: crÃÂ¨me fraÃÂ®che, kaas, bieslook, spekjes",
         "Extra toegevoegd: worteltjes, mais, augurken"
       ],
       "steps": [
         "Was en prik aardappelen. Meng olie met kruiden en bestrijk aardappelen.",
-        "Airfryer voorverwarmen op 200 Â°C. Bak aardappelen 35â45 min tot gaar.",
+        "Airfryer voorverwarmen op 200 ÃÂ°C. Bak aardappelen 35Ã¢ÂÂ45 min tot gaar.",
         "Snijd open en vul met toppings en extra groenten."
       ]
     },
     {
       "slug": "recept-7-vega-shoarma-met-patat",
-      "title": "Recept 7 â Vega Shoarma met Patat",
+      "title": "Recept 7 Ã¢ÂÂ Vega Shoarma met Patat",
       "description": "Snel gerecht met Vegan shoarma, Shoarmakruiden en Patat. Kort en duidelijk bereid in een paar stappen.",
       "image": "images/placeholder.png",
       "time": "25 min",
@@ -177,7 +176,7 @@
     },
     {
       "slug": "recept-8-vietnamese-summer-rolls",
-      "title": "Recept 8 â Vietnamese Summer Rolls",
+      "title": "Recept 8 Ã¢ÂÂ Vietnamese Summer Rolls",
       "description": "Snel gerecht met glasnoedels, Verse kruiden en tofu/tempeh. Kort en duidelijk bereid in een paar stappen.",
       "image": "images/placeholder.png",
       "time": "40 min",
@@ -188,7 +187,7 @@
       "ingredients": [
         "8 rijstvellen",
         "100 g glasnoedels",
-        "1 wortel, Â½ komkommer, Â½ paprika",
+        "1 wortel, ÃÂ½ komkommer, ÃÂ½ paprika",
         "Verse kruiden (munt, koriander, basilicum)",
         "100 g tofu/tempeh, gebakken en gemarineerd",
         "",
