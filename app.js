@@ -25,7 +25,7 @@ function card(recipe){
       <div class="body">
         <h3>${recipe.title}</h3>
         <p>${cleanText(recipe.description)}</p>
-        <div class="tags">${recipe.tags.map(t=>`<span class="tag ${t.toLowerCase()}">${t}</span>`).join('')}</div>
+        <div class="tags">${recipe.tags.map(t=>`<span class="tag ${tagClass(t)}">${t}</span>`).join('')}</div>
       </div>
     </a>
   </article>`;
@@ -41,7 +41,7 @@ async function renderList(filter='', tagFilter=''){
 });
   cards.innerHTML = filtered.map(card).join('') || '<p>Geen resultaten. Probeer een andere zoekterm.</p>';
 }
-async function loadRecipe(slug){
+async async function loadRecipe(slug){
   const data = await getData();
   const r = data.recipes.find(x=>x.slug===slug) || data.recipes[0]; if(!r) return;
   document.title = r.title + ' — Kookboek';
@@ -51,7 +51,7 @@ async function loadRecipe(slug){
   document.getElementById('r-desc').textContent = cleanText(r.description);
   document.getElementById('r-time').textContent = r.time;
   document.getElementById('r-servings').textContent = r.servings;
-  document.getElementById('r-tags').innerHTML = r.tags.map(t=>`<span class="tag ${t.toLowerCase()}">${t}</span>`).join('');
+  document.getElementById('r-tags').innerHTML = r.tags.map(t=>`<span class="tag ${tagClass(t)}">${t}</span>`).join('');
   document.getElementById('r-ingredients').innerHTML = r.ingredients.map(i=>`<li><label><input type="checkbox"> ${cleanText(i)}</label></li>`).join('');
   document.getElementById('r-steps').innerHTML = r.steps.map(s=>`<li>${cleanText(s)}</li>`).join('');
 }
