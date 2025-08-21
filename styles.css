@@ -47,7 +47,7 @@ h2{font-size:24px;margin:18px 0 8px}
 /* Tag kleurcodes per categorie */
 .tag{background:#f2f2f2;border-radius:999px;padding:4px 10px;font-size:12px}
 .tag.ontbijt{background:#ff9800;color:#fff}
-.tag.lunch{background:#2196f3;color:#fff}
+.tag.lunch{background:#ffeb3b;color:#000}
 .tag.diner{background:#4caf50;color:#fff}
 
 
@@ -104,3 +104,12 @@ h2{font-size:24px;margin:18px 0 8px}
   opacity:1;
   bottom:40px;
 }
+
+
+/* Chip-kleuren (zelfde als tags) */
+.chip.ontbijt{ background:#ff9800; color:#fff; }
+.chip.lunch{ background:#ffeb3b; color:#000; }
+.chip.diner{ background:#4caf50; color:#fff; }
+.chip.ontbijt.active{ box-shadow:0 0 0 3px rgba(255,152,0,.3); }
+.chip.lunch.active{ box-shadow:0 0 0 3px rgba(255,235,59,.3); }
+.chip.diner.active{ box-shadow:0 0 0 3px rgba(76,175,80,.3); }
