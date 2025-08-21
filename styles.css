@@ -47,7 +47,7 @@ h2{font-size:24px;margin:18px 0 8px}
 /* Tag kleurcodes per categorie */
 .tag{background:#f2f2f2;border-radius:999px;padding:4px 10px;font-size:12px}
 .tag.ontbijt{background:#ff9800;color:#fff}
-.tag.lunch{background:#2196f3;color:#fff}
+.tag.lunch{background:#ffeb3b;color:#000}
 .tag.diner{background:#4caf50;color:#fff}
 
 
@@ -55,3 +55,61 @@ h2{font-size:24px;margin:18px 0 8px}
 .filters{display:flex;gap:8px;align-items:center;padding:10px 14px;border-bottom:1px solid #eee;background:#fff;position:sticky;top:60px;z-index:9}
 .chip{border:1px solid #ddd;background:#fff;border-radius:999px;padding:8px 12px;font:inherit;cursor:pointer}
 .chip.active{border-color:var(--brand);box-shadow:0 0 0 3px rgba(30,99,255,.15)}
+
+
+/* Toast notification (rechts onderin) */
+.toast {
+  visibility: hidden;
+  min-width: 220px;
+  background-color: #4caf50;
+  color: #fff;
+  text-align: center;
+  border-radius: 10px;
+  padding: 14px;
+  position: fixed;
+  z-index: 100;
+  right: 20px;
+  bottom: 20px;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.5s, bottom 0.5s;
+}
+.toast.show {
+  visibility: visible;
+  opacity: 1;
+  bottom: 40px;
+}
+
+
+/* Toast (rechts onderin) */
+.toast{
+  visibility:hidden;
+  min-width:220px;
+  background:#4caf50;
+  color:#fff;
+  text-align:center;
+  border-radius:10px;
+  padding:14px;
+  position:fixed;
+  z-index:100;
+  right:20px;
+  bottom:20px;
+  font-weight:600;
+  opacity:0;
+  transition:opacity .5s, bottom .5s;
+  box-shadow:0 6px 20px rgba(0,0,0,.15);
+}
+.toast.show{
+  visibility:visible;
+  opacity:1;
+  bottom:40px;
+}
+
+
+/* Chip-kleuren (zelfde als tags) */
+.chip.ontbijt{ background:#ff9800; color:#fff; }
+.chip.lunch{ background:#ffeb3b; color:#000; }
+.chip.diner{ background:#4caf50; color:#fff; }
+.chip.ontbijt.active{ box-shadow:0 0 0 3px rgba(255,152,0,.3); }
+.chip.lunch.active{ box-shadow:0 0 0 3px rgba(255,235,59,.3); }
+.chip.diner.active{ box-shadow:0 0 0 3px rgba(76,175,80,.3); }
