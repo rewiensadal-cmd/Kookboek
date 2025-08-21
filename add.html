@@ -102,7 +102,29 @@
     el('clear-gh').addEventListener('click', clearSettings);
 
     // live preview
-    const form = document.getElementById('recipe-form');
+    
+// --- Prefill when editing (add.html?slug=...) ---
+const params = new URLSearchParams(location.search);
+const editSlug = params.get('slug');
+if (editSlug) {
+  try { document.title = 'Recept bewerken'; } catch(e){}
+  const slugInput = document.querySelector('[name="slug"]');
+  if (slugInput) { slugInput.value = editSlug; slugInput.readOnly = true; }
+  fetch('recipes.json')
+    .then(r => r.json())
+    .then(d => {
+      const rec = (d.recipes||[]).find(r => r.slug === editSlug);
+      if (!rec) return;
+      (document.querySelector('[name="title"]')||{}).value = rec.title || '';
+      (document.querySelector('[name="description"]')||{}).value = rec.description || '';
+      (document.querySelector('[name="time"]')||{}).value = rec.time || '';
+      (document.querySelector('[name="servings"]')||{}).value = rec.servings || '';
+      (document.querySelector('[name="tags"]')||{}).value = (rec.tags||[]).join(', ');
+      (document.querySelector('[name="ingredients"]')||{}).value = (rec.ingredients||[]).join('\n');
+      (document.querySelector('[name="steps"]')||{}).value = (rec.steps||[]).join('\n');
+    }).catch(()=>{});
+}
+const form = document.getElementById('recipe-form');
     const preview = document.getElementById('json-preview');
     form.addEventListener('input', () => {
       const fd = new FormData(form);
