@@ -5,6 +5,18 @@ function tagClass(name){
     .replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'');
 }
 
+// Normalize and sanitize text to avoid odd encoding glyphs on some devices
+function cleanText(s){
+  return (s || '')
+    .replace(/\uFEFF/g, '')
+    .replace(/\u00A0/g, ' ')
+    .replace(/[\u2000-\u200B\u202F\u205F\u3000]/g, ' ')
+    .replace(/[\u2010-\u2015]/g, '-')
+    .replace(/[\u2018\u2019]/g, "'")
+    .replace(/[\u201C\u201D]/g, '"')
+    .replace(/[\u2026]/g, '...');
+}
+
 async function getData(){ const res = await fetch('recipes.json'); return await res.json(); }
 function card(recipe){
   return `<article class="card">
@@ -12,7 +24,7 @@ function card(recipe){
       <figure><img src="${recipe.image}" alt="${recipe.title}"></figure>
       <div class="body">
         <h3>${recipe.title}</h3>
-        <p>${recipe.description}</p>
+        <p>${cleanText(recipe.description)}</p>
         <div class="tags">${recipe.tags.map(t=>`<span class="tag ${t.toLowerCase()}">${t}</span>`).join('')}</div>
       </div>
     </a>
@@ -36,12 +48,12 @@ async function loadRecipe(slug){
   document.getElementById('r-image').src = r.image;
   document.getElementById('r-image').alt = r.title;
   document.getElementById('r-title').textContent = r.title;
-  document.getElementById('r-desc').textContent = r.description;
+  document.getElementById('r-desc').textContent = cleanText(r.description);
   document.getElementById('r-time').textContent = r.time;
   document.getElementById('r-servings').textContent = r.servings;
   document.getElementById('r-tags').innerHTML = r.tags.map(t=>`<span class="tag ${t.toLowerCase()}">${t}</span>`).join('');
-  document.getElementById('r-ingredients').innerHTML = r.ingredients.map(i=>`<li><label><input type="checkbox"> ${i}</label></li>`).join('');
-  document.getElementById('r-steps').innerHTML = r.steps.map(s=>`<li>${s}</li>`).join('');
+  document.getElementById('r-ingredients').innerHTML = r.ingredients.map(i=>`<li><label><input type="checkbox"> ${cleanText(i)}</label></li>`).join('');
+  document.getElementById('r-steps').innerHTML = r.steps.map(s=>`<li>${cleanText(s)}</li>`).join('');
 }
 document.addEventListener('DOMContentLoaded',()=>{
   const search = document.getElementById('search');
